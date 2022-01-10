@@ -6,15 +6,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostsModule = void 0;
+exports.DbModule = void 0;
 const common_1 = require("@nestjs/common");
-const posts_controller_1 = require("./posts.controller");
-let PostsModule = class PostsModule {
+const mongoose_1 = require("@nestjs/mongoose");
+const user_schema_1 = require("./schema/user.schema");
+const MONGO_MODELS = mongoose_1.MongooseModule.forFeature([
+    {
+        name: 'USER_MODEL',
+        schema: user_schema_1.UserSchema,
+        collection: 'user'
+    }
+]);
+let DbModule = class DbModule {
 };
-PostsModule = __decorate([
+DbModule = __decorate([
+    (0, common_1.Global)(),
     (0, common_1.Module)({
-        controllers: [posts_controller_1.PostsController],
+        imports: [
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/', {
+                useNewUrlParser: true
+            }),
+            MONGO_MODELS
+        ],
+        exports: [MONGO_MODELS]
     })
-], PostsModule);
-exports.PostsModule = PostsModule;
-//# sourceMappingURL=posts.module.js.map
+], DbModule);
+exports.DbModule = DbModule;
+//# sourceMappingURL=db.module.js.map

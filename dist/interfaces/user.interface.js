@@ -9,28 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
-const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
+exports.User = void 0;
+const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
-let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
-    }
-    getHello() {
-        return this.appService.getHello();
-    }
+const mongoose_2 = require("mongoose");
+let User = class User extends mongoose_2.Document {
 };
 __decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-AppController = __decorate([
-    (0, common_1.Controller)(),
-    (0, swagger_1.ApiTags)('默认'),
-    __metadata("design:paramtypes", [app_service_1.AppService])
-], AppController);
-exports.AppController = AppController;
-//# sourceMappingURL=app.controller.js.map
+    (0, mongoose_1.Prop)(),
+    (0, swagger_1.ApiProperty)({
+        description: '用户手机',
+        example: '13111111111'
+    }),
+    __metadata("design:type", String)
+], User.prototype, "phone", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    (0, swagger_1.ApiProperty)({
+        description: '用户密码',
+        example: 'admin'
+    }),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+User = __decorate([
+    (0, mongoose_1.Schema)()
+], User);
+exports.User = User;
+//# sourceMappingURL=user.interface.js.map
